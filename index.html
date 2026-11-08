@@ -980,6 +980,11 @@ function orbits() {
   addEventListener("pointerdown", (ev) => {
     if (ev.button !== undefined && ev.button !== 0) return;
     if (location.hash.startsWith("#album/")) return;
+    const G = [2, 3, 5, 7];
+    if (!window.__rkNext) window.__rkNext = G[Math.floor(Math.random() * G.length)];
+    window.__rkClicks = (window.__rkClicks || 0) + 1;
+    if (window.__rkClicks < window.__rkNext) return;
+    window.__rkClicks = 0; window.__rkNext = G[Math.floor(Math.random() * G.length)];
     spawn(ev.clientX, ev.clientY);
   }, true);
 })();
