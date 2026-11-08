@@ -138,8 +138,22 @@
   .lw.on { opacity: 1; }
   .story { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 64px; }
   .story-vis { position: sticky; top: 88px; height: calc(100vh - 120px); max-height: 640px; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
-  .story-step { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; opacity: .28; transition: opacity .5s ease; }
-  .story-step.on { opacity: 1; }
+  .story-step { min-height: 86vh; display: flex; flex-direction: column; justify-content: center; will-change: opacity, transform, filter; }
+  .story-step > * { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  .story-step.on > * { opacity: 1; transform: none; }
+  .story-step.on > :nth-child(2) { transition-delay: .09s; } .story-step.on > :nth-child(3) { transition-delay: .18s; } .story-step.on > :nth-child(4) { transition-delay: .3s; }
+  .story-step .ghost { position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-family: var(--font-heading); font-size: clamp(140px,18vw,260px); line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--color-accent); opacity: .22; pointer-events: none; font-feature-settings: 'tnum'; }
+  .story-next { display: flex; align-items: center; gap: 12px; margin-top: var(--space-8); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-700); }
+  .story-next i { flex: 0 0 120px; height: 1px; background: var(--color-divider); position: relative; overflow: hidden; }
+  .story-next i::after { content: ""; position: absolute; inset: 0; background: var(--color-accent); transform-origin: left; transform: scaleX(var(--np, 0)); }
+  .story-text { position: relative; padding-left: 48px; }
+  .story-text::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--color-accent) 12%, var(--color-accent) 88%, transparent); }
+  .story-text::after { content: ""; position: absolute; left: 1px; top: 0; bottom: 0; width: 90px; pointer-events: none; background: linear-gradient(to right, color-mix(in oklch, var(--color-accent) 14%, transparent), transparent); -webkit-mask: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); mask: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); }
+  .story-bars { display: flex; gap: 6px; flex: 1; justify-content: flex-end; }
+  .story-bars span { width: 28px; height: 2px; background: var(--color-divider); position: relative; overflow: hidden; }
+  .story-bars span::after { content: ""; position: absolute; inset: 0; background: var(--color-accent); transform-origin: left; transform: scaleX(var(--f, 0)); }
+  #storyNum, #storyPhase { display: inline-block; transition: opacity .35s ease, transform .45s cubic-bezier(.2,.7,.2,1), filter .35s; }
+  .swap-out { opacity: 0 !important; transform: translateY(-14px) !important; filter: blur(4px); }
   [data-ann] { opacity: 0; transition: opacity .5s ease; }
   [data-ann].on { opacity: 1; }
   .traj-item { opacity: .35; transition: opacity .5s ease; }
@@ -150,8 +164,12 @@
     .story-vis { top: 52px; height: auto; max-height: none; z-index: 3; background: var(--color-bg); padding: 10px 0 8px; border-bottom: 1px solid var(--color-divider); gap: 6px; }
     .story-vis svg { max-height: 30vh; }
     .story-step { min-height: 62vh; }
+    .story-text { padding-left: 0; }
+    .story-text::before, .story-text::after { display: none; }
+    .story-vis { border-bottom: 0 !important; }
+    .story-vis::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(to right, var(--color-accent), transparent); }
   }
-  @media (prefers-reduced-motion: reduce) { .lw, .story-step, .traj-item, [data-ann] { opacity: 1 !important; transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .lw, .story-step, .story-step > *, .traj-item, [data-ann] { opacity: 1 !important; transform: none !important; filter: none !important; transition: none; } }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } [data-slide].on { animation: none; } #orbits { display: none; } }
 </style>
 </head>
@@ -328,11 +346,15 @@ function aboutHTML() {
       '<div class="story-vis">' + vis +
         '<div style="display:flex;align-items:baseline;gap:14px;border-top:1px solid var(--color-divider);padding-top:12px">' +
           '<span id="storyNum" style="font-family:var(--font-heading);font-size:44px;line-height:1;color:var(--color-accent);font-feature-settings:\'tnum\'">01</span>' +
-          '<span id="storyPhase" class="kicker" style="margin:0">' + e(story[0].phase) + "</span></div></div>" +
-      '<div>' + story.map((s, i) => '<article class="story-step" data-step="' + i + '" data-phase="' + e(s.phase) + '">' +
+          '<span id="storyPhase" class="kicker" style="margin:0">' + e(story[0].phase) + "</span>" +
+          '<span class="story-bars">' + story.map(() => "<span></span>").join("") + "</span></div></div>" +
+      '<div class="story-text">' + story.map((s, i) => '<article class="story-step" data-step="' + i + '" data-phase="' + e(s.phase) + '" style="position:relative">' +
+        '<span class="ghost" aria-hidden="true">' + String(i + 1).padStart(2, "0") + "</span>" +
         '<p class="kicker" style="margin:0 0 var(--space-3)">' + String(i + 1).padStart(2, "0") + " · " + e(s.phase) + "</p>" +
         '<h3 style="margin:0 0 var(--space-3);font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.4vw,40px);line-height:1.15">' + e(s.title) + "</h3>" +
-        '<p style="margin:0;font-size:16px;line-height:1.8;max-width:30em;text-wrap:pretty">' + e(s.body) + "</p></article>").join("") +
+        '<p style="margin:0;font-size:16px;line-height:1.8;max-width:30em;text-wrap:pretty">' + e(s.body) + "</p>" +
+        (story[i + 1] ? '<p class="story-next"><i></i>Next · ' + e(story[i + 1].phase) + "</p>" : "") +
+        "</article>").join("") +
       "</div></div></section>" : "") +
     "<section>" +
     (C.field.length ? '<h2 class="h2">In the field</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:var(--space-6) var(--space-4);margin-bottom:var(--space-8)">' +
@@ -701,10 +723,27 @@ function storyScroll() {
     try { const L = tr.getTotalLength(), pt = tr.getPointAtLength(L * p); hd.setAttribute("cx", pt.x); hd.setAttribute("cy", pt.y); } catch (x) {}
     const steps = [...st.querySelectorAll("[data-step]")];
     let act = 0; steps.forEach((s, i) => { if (s.getBoundingClientRect().top < vh * 0.6) act = i; });
-    steps.forEach((s, i) => s.classList.toggle("on", i === act));
+    const bars = st.querySelectorAll(".story-bars > span");
+    steps.forEach((s, i) => {
+      const sr = s.getBoundingClientRect(), d = (sr.top + sr.height / 2 - vh / 2) / vh, a = Math.abs(d);
+      s.classList.toggle("on", rm || a < 0.42);
+      if (!rm) {
+        s.style.opacity = (1 - cl((a - 0.12) * 1.9)).toFixed(3);
+        s.style.transform = "translateY(" + (d * -40).toFixed(1) + "px) scale(" + (1 - cl(a - 0.1) * 0.06).toFixed(3) + ")";
+        s.style.filter = "blur(" + (cl((a - 0.22) * 2.2) * 6).toFixed(2) + "px)";
+        const g = s.querySelector(".ghost"); if (g) g.style.transform = "translateY(calc(-50% + " + (d * 120).toFixed(1) + "px))";
+      }
+      const np = s.querySelector(".story-next"); if (np) np.style.setProperty("--np", cl((vh * 0.75 - sr.top) / sr.height).toFixed(3));
+      if (bars[i]) bars[i].style.setProperty("--f", rm ? 1 : cl((vh * 0.6 - sr.top) / sr.height).toFixed(3));
+    });
     st.querySelectorAll("[data-ann]").forEach((g) => g.classList.toggle("on", +g.dataset.ann === act));
-    document.getElementById("storyNum").textContent = String(act + 1).padStart(2, "0");
-    document.getElementById("storyPhase").textContent = steps[act].dataset.phase;
+    const num = document.getElementById("storyNum"), ph = document.getElementById("storyPhase"), nv = String(act + 1).padStart(2, "0");
+    if (num.textContent !== nv && !num.dataset.busy) {
+      if (rm) { num.textContent = nv; ph.textContent = steps[act].dataset.phase; }
+      else { num.dataset.busy = 1; num.classList.add("swap-out"); ph.classList.add("swap-out");
+        setTimeout(() => { const a2 = window.__storyAct ?? act; num.textContent = String(a2 + 1).padStart(2, "0"); ph.textContent = steps[a2].dataset.phase; num.classList.remove("swap-out"); ph.classList.remove("swap-out"); delete num.dataset.busy; }, 260); }
+    }
+    window.__storyAct = act;
   }
   const tj = document.getElementById("traj");
   if (tj) {
