@@ -91,7 +91,7 @@
   .album-card { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: var(--space-6); align-items: center; margin: 0 0 var(--space-8); padding: var(--space-4); border: 1px solid var(--color-accent); background: var(--color-bg); color: var(--color-text); text-decoration: none; box-shadow: var(--shadow-sm); transition: box-shadow .3s, transform .3s; }
   .album-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); color: var(--color-text); }
   .album-card:hover .btn { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
-  .album-cover { aspect-ratio: 3 / 2; overflow: hidden; padding: 8px; background: var(--color-neutral-100); border: 1px solid var(--color-neutral-300); }
+  .album-cover { position: relative; aspect-ratio: 3 / 2; overflow: hidden; padding: 8px; background: var(--color-neutral-100); border: 1px solid var(--color-neutral-300); }
   .album-cover > div { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
   .album-card:hover .album-cover > div { transform: scale(1.04); }
   @media (max-width: 680px) { .album-card { grid-template-columns: 1fr; } }
@@ -429,9 +429,10 @@ function researchHTML() {
       "</div></article>").join("") + "</section>";
 }
 
+const sig = (r, b, w) => '<img src="assets/signature.svg" alt="" aria-hidden="true" style="position:absolute;right:' + r + 'px;bottom:' + b + 'px;width:' + (w || 23) + 'px;height:auto;opacity:.9;pointer-events:none;z-index:1">';
 function slideshowHTML(list, tone, ratio) {
   return '<div style="margin-bottom:var(--space-8)"><div id="slideshow" class="plate" style="position:relative;width:100%;aspect-ratio:' + (ratio || "16/7") + ';overflow:hidden;padding:10px;background:var(--color-neutral-100);border:1px solid var(--color-neutral-300);box-shadow:var(--shadow-md)">' +
-    list.map((s, i) => '<div data-slide="' + i + '" role="img" aria-label="' + e(s.caption) + '" style="position:absolute;inset:10px;background-image:url(&quot;' + e(s.src) + '&quot;);background-size:' + (tone === "paint" ? "contain" : "cover") + ';background-position:center;background-repeat:no-repeat;background-color:var(--color-neutral-200);opacity:0;transition:opacity 900ms ease"></div>').join("") +
+    list.map((s, i) => '<div data-slide="' + i + '" role="img" aria-label="' + e(s.caption) + '" style="position:absolute;inset:10px;background-image:url(&quot;' + e(s.src) + '&quot;);background-size:' + (tone === "paint" ? "contain" : "cover") + ';background-position:center;background-repeat:no-repeat;background-color:var(--color-neutral-200);opacity:0;transition:opacity 900ms ease"></div>').join("") + sig(20, 20, 29) +
     '</div><div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--space-3);margin-top:var(--space-2)">' +
     '<p id="slidecap" style="font-size:13px;line-height:1.5;margin:0;color:var(--color-neutral-700)"></p><div style="display:flex;gap:6px">' +
     list.map((s, i) => '<button data-dot="' + i + '" aria-label="Slide ' + (i + 1) + '" style="width:7px;height:7px;padding:0;border-radius:50%;cursor:pointer;border:1px solid var(--color-accent);background:transparent"></button>').join("") +
@@ -450,14 +451,14 @@ function photoHTML() {
       const tape = (deg, pos) => '<span style="position:absolute;width:74px;height:24px;transform:rotate(' + deg + 'deg);background:' + TINTS[i % TINTS.length] + ';border-left:1px solid rgba(255,255,255,.55);border-right:1px solid rgba(255,255,255,.55);box-shadow:0 1px 2px rgba(32,31,29,.14);pointer-events:none;' + pos + '"></span>';
       return '<figure style="break-inside:avoid;margin:0 0 var(--space-6)"><div class="polaroid" data-zoom="' + e(p.src) + '" data-cap="' + e(p.caption) + '" data-list="photographs" data-i="' + i + '" style="position:relative;cursor:zoom-in;padding:10px 0">' +
         '<img class="plate" src="' + e(p.src) + '" alt="' + e(p.caption) + '" loading="lazy" style="display:block;width:100%;height:auto;padding:8px 8px 66px;background:var(--color-neutral-100);border:1px solid var(--color-neutral-300);box-shadow:var(--shadow-sm)">' +
-        "<figcaption style=\"position:absolute;left:10px;right:10px;bottom:26px;margin:0;text-align:center;font-family:var(--font-heading);font-size:14px;line-height:1.3;color:var(--color-neutral-800);font-feature-settings:'tnum';pointer-events:none\">" + e(p.caption) + "</figcaption>" +
+        "<figcaption style=\"position:absolute;left:10px;right:10px;bottom:26px;margin:0;text-align:center;font-family:var(--font-heading);font-size:14px;line-height:1.3;color:var(--color-neutral-800);font-feature-settings:'tnum';pointer-events:none\">" + e(p.caption) + "</figcaption>" + sig(16, 84) +
         tape(-38 + (i % 3) * 4, "top:0;left:-10px") + tape(-38 - (i % 3) * 4, "bottom:0;right:-10px") + "</div></figure>";
     }).join("") + "</div></section>";
 }
 
 function albumCard(a) {
   return '<a href="#album/' + e(a.id) + '" class="album-card" aria-label="Open album ' + e(a.title) + '">' +
-    '<div class="album-cover plate" data-acover>' + [a.cover].concat(a.items.map((x) => x.src).filter((s) => s !== a.cover)).map((s, i) => '<div data-as' + (i === 0 ? ' class="on"' : "") + ' style="background-image:url(&quot;' + e(s) + '&quot;)"></div>').join("") + "</div>" +
+    '<div class="album-cover plate" data-acover>' + [a.cover].concat(a.items.map((x) => x.src).filter((s) => s !== a.cover)).map((s, i) => '<div data-as' + (i === 0 ? ' class="on"' : "") + ' style="background-image:url(&quot;' + e(s) + '&quot;)"></div>').join("") + sig(16, 16, 26) + "</div>" +
     '<div class="album-meta">' +
       '<p class="kicker" style="margin:0 0 var(--space-2)">New album · ' + e(a.released) + '</p>' +
       '<h3 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(32px,4.6vw,50px);line-height:1.02;letter-spacing:-.01em;margin:0 0 var(--space-3);text-wrap:balance">' + e(a.title) + '</h3>' +
@@ -492,6 +493,33 @@ function egretSVG() {
   return '<svg class="egrets" viewBox="0 0 340 250" role="img" aria-label="Line drawing of two egrets wading through flowing water" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">' +
     '<g transform="translate(168 22) scale(.82)">' + b1 + '</g>' + b2 + water + '</svg>';
 }
+function cageSVG() {
+  const D = 9, an = (attr, kt, v, extra) => '<animate attributeName="' + attr + '" dur="' + D + 's" keyTimes="' + kt + '" values="' + v + '" repeatCount="indefinite"' + (extra || "") + '/>';
+  const at = (type, kt, v) => '<animateTransform attributeName="transform" type="' + type + '" dur="' + D + 's" keyTimes="' + kt + '" values="' + v + '" repeatCount="indefinite"/>';
+  const xs = [100, 112.5, 125, 137.5, 150, 162.5, 175, 187.5, 200];
+  const dome = xs.map((x) => '<path d="M' + x + ' 90 Q' + x + ' 46 150 40"/>').join("");
+  const bar = (x) => '<path d="M' + x + ' 90 V198"/>';
+  const fixed = xs.filter((x) => x < 137 || x > 163).map(bar).join("");
+  const bend = (x, ang) => '<g>' + at("rotate", "0;.42;.47;.95;.96;1", "0 " + x + " 92;0 " + x + " 92;" + ang + " " + x + " 92;" + ang + " " + x + " 92;0 " + x + " 92;0 " + x + " 92") + bar(x) + '</g>';
+  const fall = '<g>' + at("translate", "0;.42;.52;.95;.96;1", "0 0;0 0;4 46;4 46;0 0;0 0") + an("opacity", "0;.42;.52;.95;.96;1", "1;1;0;0;1;1") + bar(150) + '</g>';
+  const spark = '<g class="eg-acc" opacity="0">' + an("opacity", "0;.42;.44;.5;1", "0;0;1;0;0") + '<path d="M132 118 l-8 -4 M132 124 l-9 2 M168 118 l8 -4 M168 124 l9 2 M150 196 l-4 8 M150 196 l5 8"/></g>';
+  const cage = '<g>' + at("translate", "0;.30;.32;.34;.36;.38;.40;.42;1", "0 0;0 0;-1.5 0;1.5 0;-1.5 0;1.5 0;-1 0;0 0;0 0") +
+    '<path d="M150 8 V29"/><circle cx="150" cy="34" r="5"/>' + dome + '<ellipse cx="150" cy="90" rx="50" ry="3.5"/>' + fixed +
+    bend(137.5, 20) + bend(162.5, -20) + fall + '<path d="M112 160 H188" opacity=".7"/><path d="M92 198 H208 L203 208 H97 Z"/>' + spark + '</g>';
+  const folded = '<g>' + an("opacity", "0;.30;.301;.78;.781;1", "1;1;0;0;1;1") + '<path d="M-7 -3 C0 -7 8 -5 10 0 C4 1 -3 3 -11 3"/></g>';
+  const flap = '<g opacity="0">' + an("opacity", "0;.30;.301;.78;.781;1", "0;0;1;1;0;0") +
+    '<g><animateTransform attributeName="transform" type="rotate" values="10 2 -4;-55 2 -4;10 2 -4" dur=".26s" repeatCount="indefinite"/><path d="M-4 -4 C-2 -16 6 -24 14 -26 C12 -16 8 -8 4 -3"/></g></g>';
+  const legs = '<g>' + an("opacity", "0;.44;.48;.96;.97;1", "1;1;0;0;1;1") + '<path d="M0 10 L-1 16 M5 10 L6 16"/></g>';
+  const birdBody = '<path d="M-14 2 C-10 -8 6 -10 12 -4 C16 0 14 8 6 10 C-2 12 -10 8 -14 2 Z"/><circle cx="13" cy="-8" r="6"/><circle cx="15" cy="-9" r=".9" fill="currentColor"/><path class="eg-acc" d="M18.5 -9.5 L25 -7.5 L18.5 -5.5"/><path d="M-14 2 L-27 -3 L-25 4 L-13 5"/>' + legs + folded + flap;
+  const bird = '<g>' + at("translate", "0;.12;.15;.18;.30;.33;.36;.39;.42;.46;.55;.66;.78;.96;.97;1", "150 144;150 144;150 136;150 144;150 144;153 139;146 141;153 139;150 144;150 152;208 112;286 46;372 -36;372 -36;150 144;150 144") +
+    an("opacity", "0;.78;.79;.97;1", "1;1;0;0;1") +
+    '<g>' + at("scale", "0;.42;.55;.78;.97;1", "1;1;1.3;1.15;1;1") + at("rotate", "0;.46;.55;.78;.96;.97;1", "0;0;-18;-26;-26;0;0").replace('type="rotate"', 'type="rotate" additive="sum"') + birdBody + '</g></g>';
+  const feather = (x, y, dx, dy, r, b) => '<g opacity="0">' + an("opacity", "0;" + b + ";" + (b + .02) + ";" + (b + .3) + ";1", "0;0;.8;0;0") + at("translate", "0;" + b + ";" + (b + .3) + ";1", x + " " + y + ";" + x + " " + y + ";" + (x + dx) + " " + (y + dy) + ";" + (x + dx) + " " + (y + dy)) +
+    '<g transform="rotate(' + r + ')"><path d="M0 0 C3 -3 9 -3 12 0 C9 3 3 3 0 0 Z M0 0 H14"/></g></g>';
+  const feathers = feather(152, 140, -18, 70, 30, .34) + feather(160, 150, 14, 52, -40, .45) + feather(176, 130, 26, 80, 70, .5);
+  return '<svg class="egrets" viewBox="0 0 340 250" role="img" aria-label="Line drawing of a bird in a hanging cage; the bars break and it flies free" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path class="eg-water" d="M40 8 C110 3 200 12 320 5" opacity=".8"/>' + cage + feathers + bird + '</svg>';
+}
 function albumHTML() {
   const a = album;
   return '<section style="position:relative">' +
@@ -500,18 +528,20 @@ function albumHTML() {
     '<h1 style="font-size:clamp(44px,7.5vw,92px);font-weight:400;line-height:.98;text-wrap:balance;letter-spacing:-.02em;margin:0 0 var(--space-4)">' + e(a.title) + '<span class="rule"></span></h1>' +
     '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-6) var(--space-8);margin:0 0 var(--space-8)">' +
       '<div style="flex:1 1 380px;min-width:0;font-size:16px;line-height:1.75;text-wrap:pretty">' + a.intro.split(/\n\s*\n/).map((p) => '<p style="margin:0 0 var(--space-3)">' + e(p) + '</p>').join("") + '</div>' +
-      egretSVG() +
+      (a.id === "morning-feathers" ? cageSVG() : egretSVG()) +
     '</div>' +
-    slideshowHTML(a.items, "photo", "3/2") +
+    '<div style="max-width:80%;margin:0 auto">' + slideshowHTML(a.items, "photo", "3/2") + '</div>' +
     '<div style="column-width:220px;column-count:3;column-gap:var(--space-6)">' +
     a.items.map((p, i) => {
       const pin = (pos) => '<span class="pin" style="' + pos + '"></span>';
       return '<figure style="break-inside:avoid;margin:0 0 var(--space-6)"><div class="polaroid" data-zoom="' + e(p.src) + '" data-cap="' + e(p.caption) + '" data-list="album" data-i="' + i + '" style="position:relative;cursor:zoom-in;padding:6px 0;transform:rotate(' + [-.8, .6, -.3, .9, -.6][i % 5] + 'deg)">' +
         '<img class="plate album-ph" src="' + e(p.src) + '" alt="' + e(p.caption) + '" loading="lazy" style="background-image:linear-gradient(rgba(250,246,238,.55),rgba(236,229,216,.6)),url(&quot;' + e(C.site.texture) + '&quot;)">' +
         "<figcaption style=\"position:absolute;left:10px;right:10px;bottom:24px;margin:0;text-align:center;font-family:var(--font-heading);font-size:14px;line-height:1.3;color:var(--color-neutral-800);pointer-events:none\">" + e(p.caption) + "</figcaption>" +
-        pin("top:14px;left:14px") + pin("bottom:14px;right:14px") + "</div></figure>";
+        pin("top:14px;left:14px") + pin("bottom:14px;right:14px") + sig(22, 80) + "</div></figure>";
     }).join("") +
-    '</div><p class="text-muted" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-6) 0 0;text-align:center">' + e(a.title) + ' · ' + e(a.released) + '</p></section>';
+    '</div><p class="text-muted" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-6) 0 0;text-align:center">' + e(a.title) + ' · ' + e(a.released) + '</p>' +
+    ((C.albums || []).filter((x) => x !== a).length ? '<div class="hr-fade" style="height:1px;margin:var(--space-10, 64px) 0 var(--space-6);background:linear-gradient(90deg,transparent,var(--color-accent) 50%,transparent)"></div><p class="kicker" style="margin:0 0 var(--space-3)">Continue to the next album</p>' + C.albums.filter((x) => x !== a).map(albumCard).join("") : "") +
+    '</section>';
 }
 
 /* ---------- album background: hairline birds crossing the page ---------- */
@@ -575,7 +605,7 @@ function paintHTML() {
       '<span style="position:absolute;top:31px;left:50%;width:24px;height:4px;margin-left:-12px;border-radius:2px;background:rgba(255,238,196,.95);box-shadow:0 0 12px 4px rgba(255,232,178,.7);pointer-events:none"></span>' +
       '<span style="position:absolute;top:33px;left:50%;width:74%;max-width:210px;height:64px;transform:translateX(-50%);background:linear-gradient(to bottom,rgba(255,240,201,.8),rgba(255,240,201,0));clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);pointer-events:none"></span>' +
       '<img class="plate" src="' + e(p.src) + '" alt="' + e(p.caption) + '" loading="lazy" style="display:block;width:100%;height:auto;padding:14px 14px 52px;background:var(--color-neutral-100);border:6px solid var(--color-neutral-800);outline:1px solid var(--color-neutral-400);box-shadow:0 14px 26px -14px rgba(32,31,29,.55)">' +
-      '<figcaption style="position:absolute;left:20px;right:20px;bottom:26px;margin:0;text-align:center;font-family:var(--font-heading);font-size:14px;line-height:1.3;color:var(--color-neutral-800);pointer-events:none">' + e(p.caption) + "</figcaption></div></figure>").join("") +
+      '<figcaption style="position:absolute;left:20px;right:20px;bottom:26px;margin:0;text-align:center;font-family:var(--font-heading);font-size:14px;line-height:1.3;color:var(--color-neutral-800);pointer-events:none">' + e(p.caption) + "</figcaption>" + sig(26, 64) + "</div></figure>").join("") +
     "</div></section>";
 }
 
@@ -709,13 +739,21 @@ function drawLightbox(src, cap, fresh) {
   const btn = (attr, label) => '<button class="btn btn-secondary" ' + attr + ' style="white-space:nowrap;width:max-content;height:auto;cursor:pointer;background:var(--color-neutral-100)">' + label + "</button>";
   box.innerHTML = '<div class="dialog-backdrop' + (fresh ? " lb" : "") + '" style="position:fixed;inset:0;z-index:50;background:rgba(20,19,18,.94);overflow:hidden">' +
     '<div style="position:absolute;left:50%;top:50%;width:' + pw + 'px;height:' + ph + 'px;transform:translate(-50%,-50%)' + (rot ? ' rotate(90deg)' : '') + ';display:flex;flex-direction:column;gap:' + (rot ? '6px' : 'var(--space-3)') + ';padding:' + (rot ? '8px 14px' : '20px 28px') + ' !important;box-sizing:border-box;margin:0">' +
-    '<img src="' + e(src) + '" alt="' + e(cap) + '" style="flex:1 1 auto;min-height:0;width:100%;height:100%;object-fit:contain;display:block">' +
+    '<div style="position:relative;flex:1 1 auto;min-height:0"><img data-lbimg src="' + e(src) + '" alt="' + e(cap) + '" style="width:100%;height:100%;object-fit:contain;display:block"><img data-lbsig src="assets/signature.svg" alt="" aria-hidden="true" style="position:absolute;width:30px;height:auto;opacity:0;pointer-events:none;transition:opacity .3s"></div>' +
     '<div style="flex:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-3)">' +
     '<p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-200);flex:1 1 200px">' + e(cap) + (LB ? ' <span style="color:var(--color-neutral-400);font-feature-settings:\'tnum\'">· ' + (LB.i + 1) + " / " + LB.list.length + "</span>" : "") + "</p>" +
     '<div style="display:flex;gap:var(--space-2)">' + (LB ? btn('data-lb="-1"', "‹ Previous") + btn('data-lb="1"', "Next ›") : "") + btn('data-close', "Close") + "</div></div></div></div>";
   box.querySelector(".dialog-backdrop").addEventListener("click", (ev) => { if (!ev.target.closest("[data-lb]")) { box.innerHTML = ""; LB = null; } });
   box.querySelectorAll("[data-lb]").forEach((b) => b.onclick = () => stepLightbox(+b.dataset.lb));
   LBcur = { src, cap };
+  const im = box.querySelector("[data-lbimg]"), sg = box.querySelector("[data-lbsig]");
+  const place = () => {
+    const bw = im.clientWidth, bh = im.clientHeight, r = Math.min(bw / im.naturalWidth, bh / im.naturalHeight);
+    if (!r) return;
+    const dw = im.naturalWidth * r, dh = im.naturalHeight * r;
+    sg.style.right = ((bw - dw) / 2 + 10) + "px"; sg.style.bottom = ((bh - dh) / 2 + 10) + "px"; sg.style.opacity = ".9";
+  };
+  im.complete ? place() : im.addEventListener("load", place);
 }
 let LBcur = null;
 addEventListener("resize", () => { if (LBcur && document.getElementById("lightbox").innerHTML) drawLightbox(LBcur.src, LBcur.cap, false); });

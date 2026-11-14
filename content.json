@@ -556,6 +556,28 @@
   },
   "albums": [
     {
+      "id": "morning-feathers",
+      "title": "Morning Feathers",
+      "released": "November 2026",
+      "place": "Thiruvananthapuram Zoo · Keralam",
+      "intro": "Good Morning, Wild! All the photos of this album were captured before noon hit the wild. For some, it was a slow morning of caring for themselves, perching and observing the beautiful world, and for the rest, it was a regular feasting time on the waters and the leaves.\n\nMost of the photos were captured at the zoo in Trivandrum, Keralam, India. The zoo has a mixed ecosystem - caged and free. My work mostly covered the free ones living over the big lake on its premises. I observed that the free birds were calm, flying with grace, while those in the limited space of the cage were shrieking, flying vigorously in circles and fighting for airspace and treespace. Some enclosures seemed to have just too many birds.\n\nIndeed, the high-flying birds shall not be trapped for human enjoyment. Enclosures of aquatic birds can be accepted, given they have a big enough pond. Anyways, it's a great place to visit over the weekend and closely watch the wildlife.\n\nI sincerely wish for a world where no birds are caged. One can only imagine their endless plight. Some of the dark enclosures reminded me of cellular jail at Vijayapuram. The cries of those birds seemed as if they were constantly reaching out for help, asking to be set free.",
+      "cover": "assets/morning/UTK_0822.jpg",
+      "items": [
+        { "src": "assets/morning/UTK_0822.jpg", "caption": "Great white pelican, wings open over the lake" },
+        { "src": "assets/morning/UTK_0829.jpg", "caption": "Spot-billed pelican with its catch" },
+        { "src": "assets/morning/UTK_0828.jpg", "caption": "Breakfast, tossed and swallowed" },
+        { "src": "assets/morning/UTK_0807.jpg", "caption": "A morning shake after the bath" },
+        { "src": "assets/morning/UTK_0845.jpg", "caption": "Black-crowned night heron among the vines" },
+        { "src": "assets/morning/UTK_0840.jpg", "caption": "Little egret, perched and watching" },
+        { "src": "assets/morning/UTK_0854.jpg", "caption": "Pond heron stalking the shallows" },
+        { "src": "assets/morning/UTK_0901.jpg", "caption": "Openbill stork and darter on a fallen log" },
+        { "src": "assets/morning/UTK_0793.jpg", "caption": "Grey langur, lost in thought" },
+        { "src": "assets/morning/UTK_0918.jpg", "caption": "Blackbuck resting in the green" },
+        { "src": "assets/morning/UTK_0497.jpg", "caption": "Four vs One" },
+        { "src": "assets/morning/UTK_0783.jpg", "caption": "Green-winged macaw, behind the mesh" }
+      ]
+    },
+    {
       "id": "flamingo",
       "title": "Flamingos from Rocket Waters",
       "released": "November 2026",
