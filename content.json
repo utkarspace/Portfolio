@@ -236,64 +236,7 @@
   },
   "photographs": {
     "intro": "Away from the test stand, a camera — mostly birds, and whatever else holds still long enough. Kept here as a contact sheet rather than a gallery.",
-    "items": [
-      {
-        "src": "assets/photo-sunset-lamp-post.jpg",
-        "caption": "The sun going down behind a lamp post"
-      },
-      {
-        "src": "assets/photo-dried-chillies.jpg",
-        "caption": "Dried chillies laid out on a sack"
-      },
-      {
-        "src": "assets/photo-sandalwood.jpg",
-        "caption": "Sandalwood shavings smouldering in an iron pan"
-      },
-      {
-        "src": "assets/photo-peacock-pansy.jpg",
-        "caption": "Peacock pansy, wings half shut"
-      },
-      {
-        "src": "assets/photo-puppy.jpg",
-        "caption": "A puppy crossing the yard at noon"
-      },
-      {
-        "src": "assets/photo-night-heron.jpg",
-        "caption": "Juvenile black-crowned night heron in the reeds"
-      },
-      {
-        "src": "assets/photo-egret-hyacinth.webp",
-        "caption": "Egret standing in the water hyacinth"
-      },
-      {
-        "src": "assets/photo-squirrel.jpg",
-        "caption": "A squirrel, mostly hidden"
-      },
-      {
-        "src": "assets/photo-peace-and-chaos.webp",
-        "caption": "Peace and Chaos"
-      },
-      {
-        "src": "assets/photo-leopard.webp",
-        "caption": "Leopard on a log, looking away"
-      },
-      {
-        "src": "assets/photo-darter.webp",
-        "caption": "Darter preening over the nest"
-      },
-      {
-        "src": "assets/photo-egret-tideline.webp",
-        "caption": "Egret walking the tideline"
-      },
-      {
-        "src": "assets/photo-kingfisher.webp",
-        "caption": "White-throated kingfisher on a railing"
-      },
-      {
-        "src": "assets/photo-purple-sunbird.png",
-        "caption": "Purple sunbird calling from a thorn"
-      }
-    ]
+    "items": []
   },
   "paintings": {
     "intro": "Acrylic and watercolour on canvas board — mostly orbits, launches and the gods who watch them.",
@@ -556,6 +499,36 @@
   },
   "albums": [
     {
+      "id": "regolith",
+      "title": "Regolith",
+      "released": "November 2026",
+      "place": "Backyard telescope",
+      "intro": "This album marks the very first stills from my astrophotography journey.\n\nRegolith is the loose dust and broken rock that blankets the Moon — the ground every lander has touched. These frames were made from the backyard, through a modest telescope, on nights when the air held still long enough.\n\nFour views of the Moon, from the full disc down to crater rims along the terminator, where the low sun throws the longest shadows and the relief stands up. And one guest from further out: Saturn, small and soft, but unmistakably ringed.",
+      "cover": "assets/regolith/UTK_1130.jpg",
+      "items": [
+        {
+          "src": "assets/regolith/UTK_1116.jpg",
+          "caption": "Mare Imbrium's rim outlined by the Montes Apenninus range, with peaks as high as 5.5 km"
+        },
+        {
+          "src": "assets/regolith/UTK_1117.jpg",
+          "caption": "Half moon, the terminator cutting through the highlands"
+        },
+        {
+          "src": "assets/regolith/UTK_1129.jpg",
+          "caption": "Mare Humorum, with Gassendi crater along its upper rim"
+        },
+        {
+          "src": "assets/regolith/UTK_1130.jpg",
+          "caption": "Waxing gibbous, the rays of Copernicus and the dark maria"
+        },
+        {
+          "src": "assets/regolith/UTK_0362.jpg",
+          "caption": "Saturn, rings tilted — a smudge of gold through the eyepiece"
+        }
+      ]
+    },
+    {
       "id": "morning-feathers",
       "title": "Morning Feathers",
       "released": "November 2026",
@@ -563,18 +536,54 @@
       "intro": "Good Morning, Wild! All the photos of this album were captured before noon hit the wild. For some, it was a slow morning of caring for themselves, perching and observing the beautiful world, and for the rest, it was a regular feasting time on the waters and the leaves.\n\nMost of the photos were captured at the zoo in Trivandrum, Keralam, India. The zoo has a mixed ecosystem - caged and free. My work mostly covered the free ones living over the big lake on its premises. I observed that the free birds were calm, flying with grace, while those in the limited space of the cage were shrieking, flying vigorously in circles and fighting for airspace and treespace. Some enclosures seemed to have just too many birds.\n\nIndeed, the high-flying birds shall not be trapped for human enjoyment. Enclosures of aquatic birds can be accepted, given they have a big enough pond. Anyways, it's a great place to visit over the weekend and closely watch the wildlife.\n\nI sincerely wish for a world where no birds are caged. One can only imagine their endless plight. Some of the dark enclosures reminded me of cellular jail at Vijayapuram. The cries of those birds seemed as if they were constantly reaching out for help, asking to be set free.",
       "cover": "assets/morning/UTK_0822.jpg",
       "items": [
-        { "src": "assets/morning/UTK_0822.jpg", "caption": "Great white pelican, wings open over the lake" },
-        { "src": "assets/morning/UTK_0829.jpg", "caption": "Spot-billed pelican with its catch" },
-        { "src": "assets/morning/UTK_0828.jpg", "caption": "Breakfast, tossed and swallowed" },
-        { "src": "assets/morning/UTK_0807.jpg", "caption": "A morning shake after the bath" },
-        { "src": "assets/morning/UTK_0845.jpg", "caption": "Black-crowned night heron among the vines" },
-        { "src": "assets/morning/UTK_0840.jpg", "caption": "Little egret, perched and watching" },
-        { "src": "assets/morning/UTK_0854.jpg", "caption": "Pond heron stalking the shallows" },
-        { "src": "assets/morning/UTK_0901.jpg", "caption": "Openbill stork and darter on a fallen log" },
-        { "src": "assets/morning/UTK_0793.jpg", "caption": "Grey langur, lost in thought" },
-        { "src": "assets/morning/UTK_0918.jpg", "caption": "Blackbuck resting in the green" },
-        { "src": "assets/morning/UTK_0497.jpg", "caption": "Four vs One" },
-        { "src": "assets/morning/UTK_0783.jpg", "caption": "Green-winged macaw, behind the mesh" }
+        {
+          "src": "assets/morning/UTK_0822.jpg",
+          "caption": "Great white pelican, wings open over the lake"
+        },
+        {
+          "src": "assets/morning/UTK_0829.jpg",
+          "caption": "Spot-billed pelican with its catch"
+        },
+        {
+          "src": "assets/morning/UTK_0828.jpg",
+          "caption": "Breakfast, tossed and swallowed"
+        },
+        {
+          "src": "assets/morning/UTK_0807.jpg",
+          "caption": "A morning shake after the bath"
+        },
+        {
+          "src": "assets/morning/UTK_0845.jpg",
+          "caption": "Black-crowned night heron among the vines"
+        },
+        {
+          "src": "assets/morning/UTK_0840.jpg",
+          "caption": "Little egret, perched and watching"
+        },
+        {
+          "src": "assets/morning/UTK_0854.jpg",
+          "caption": "Pond heron stalking the shallows"
+        },
+        {
+          "src": "assets/morning/UTK_0901.jpg",
+          "caption": "Openbill stork and darter on a fallen log"
+        },
+        {
+          "src": "assets/morning/UTK_0793.jpg",
+          "caption": "Grey langur, lost in thought"
+        },
+        {
+          "src": "assets/morning/UTK_0918.jpg",
+          "caption": "Blackbuck resting in the green"
+        },
+        {
+          "src": "assets/morning/UTK_0497.jpg",
+          "caption": "Four vs One"
+        },
+        {
+          "src": "assets/morning/UTK_0783.jpg",
+          "caption": "Green-winged macaw, behind the mesh"
+        }
       ]
     },
     {
@@ -664,6 +673,73 @@
         {
           "src": "assets/flamingo/UTK_0560.jpg",
           "caption": "Plain tiger on a thorn"
+        }
+      ]
+    },
+    {
+      "id": "vibgyor",
+      "title": "Vibgyor",
+      "label": "Album",
+      "released": "2018–2025",
+      "place": "",
+      "intro": "Away from the test stand, a camera — mostly birds, and whatever else holds still long enough.\n\nEvery colour of the spectrum turns up somewhere in these — sunsets, chillies, feathers, the green of a lake. A collection gathered between 2018 and 2025.",
+      "cover": "assets/photo-sunset-lamp-post.jpg",
+      "items": [
+        {
+          "src": "assets/photo-sunset-lamp-post.jpg",
+          "caption": "The sun going down behind a lamp post"
+        },
+        {
+          "src": "assets/photo-dried-chillies.jpg",
+          "caption": "Dried chillies laid out on a sack"
+        },
+        {
+          "src": "assets/photo-sandalwood.jpg",
+          "caption": "Sandalwood shavings smouldering in an iron pan"
+        },
+        {
+          "src": "assets/photo-peacock-pansy.jpg",
+          "caption": "Peacock pansy, wings half shut"
+        },
+        {
+          "src": "assets/photo-puppy.jpg",
+          "caption": "A puppy crossing the yard at noon"
+        },
+        {
+          "src": "assets/photo-night-heron.jpg",
+          "caption": "Juvenile black-crowned night heron in the reeds"
+        },
+        {
+          "src": "assets/photo-egret-hyacinth.webp",
+          "caption": "Egret standing in the water hyacinth"
+        },
+        {
+          "src": "assets/photo-squirrel.jpg",
+          "caption": "A squirrel, mostly hidden"
+        },
+        {
+          "src": "assets/photo-peace-and-chaos.webp",
+          "caption": "Peace and Chaos"
+        },
+        {
+          "src": "assets/photo-leopard.webp",
+          "caption": "Leopard on a log, looking away"
+        },
+        {
+          "src": "assets/photo-darter.webp",
+          "caption": "Darter preening over the nest"
+        },
+        {
+          "src": "assets/photo-egret-tideline.webp",
+          "caption": "Egret walking the tideline"
+        },
+        {
+          "src": "assets/photo-kingfisher.webp",
+          "caption": "White-throated kingfisher on a railing"
+        },
+        {
+          "src": "assets/photo-purple-sunbird.png",
+          "caption": "Purple sunbird calling from a thorn"
         }
       ]
     }
