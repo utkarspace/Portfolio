@@ -503,7 +503,7 @@
       "title": "Regolith",
       "released": "November 2026",
       "place": "Backyard telescope",
-      "intro": "This album marks the very first stills from my astrophotography journey.\n\nRegolith is the loose dust and broken rock that blankets the Moon — the ground every lander has touched. These frames were made from the backyard, through a modest telescope, on nights when the air held still long enough.\n\nFour views of the Moon, from the full disc down to crater rims along the terminator, where the low sun throws the longest shadows and the relief stands up. And one guest from further out: Saturn, small and soft, but unmistakably ringed.",
+      "intro": "This album marks the very first stills from my astrophotography journey.\n\nRegolith is the loose dust and broken rock that blankets the Moon — the ground every lander has touched. These frames were made from the backyard, through a modest telescope, on nights when the air held still long enough.",
       "cover": "assets/regolith/UTK_1130.jpg",
       "items": [
         {
@@ -523,10 +523,220 @@
           "caption": "Waxing gibbous, the rays of Copernicus and the dark maria"
         },
         {
+          "src": "assets/regolith/UTK_1160.jpg",
+          "caption": "Waxing gibbous in monochrome — Tycho's rays fanning across the southern highlands"
+        },
+        {
           "src": "assets/regolith/UTK_0362.jpg",
           "caption": "Saturn, rings tilted — a smudge of gold through the eyepiece"
         }
-      ]
+      ],
+      "compare": {
+        "title": "Mineral Photography",
+        "caption": "Full Moon, waxing gibbous. Drag the slider to compare the frame as shot with the colour-enhanced version.",
+        "original": "assets/regolith/mineral-original-s.jpg",
+        "processed": "assets/regolith/mineral-processed-s.jpg",
+        "notes": [
+          {
+            "tone": "none",
+            "text": "The Moon is not grey. Its surface carries faint colour differences that come from the minerals in its rocks, but they are far too subtle for the eye. A mineral Moon is made by stacking many frames for a clean, low-noise image, then raising the saturation until those hidden tints become visible. No colour is painted in — every hue is already in the data, only exaggerated."
+          },
+          {
+            "tone": "ti",
+            "text": "Blue tones mark titanium-rich basalts. The dark lava plains, or maria, formed when molten rock flooded old impact basins some three to four billion years ago. Where that lava carried a lot of ilmenite, an iron–titanium oxide, the surface reflects slightly more blue light. Mare Tranquillitatis — where Apollo 11 landed — and parts of Oceanus Procellarum show it most strongly."
+          },
+          {
+            "tone": "fe",
+            "text": "Orange and brown tones mark basalts that are rich in iron but poor in titanium, such as much of Mare Serenitatis and Mare Imbrium. The contrast between neighbouring seas shows that they were filled by separate eruptions of differing chemistry."
+          },
+          {
+            "tone": "hl",
+            "text": "The bright, near-white regions are the highlands: the Moon's ancient crust, made largely of anorthosite, a rock rich in calcium and aluminium. The bright streaks radiating from young craters such as Tycho and Copernicus are fresh material thrown out by impact, not yet darkened by space weathering."
+          }
+        ],
+        "locations": [
+          {
+            "label": "Mare Crisium",
+            "kind": "m",
+            "x": 65.53,
+            "y": 34.37
+          },
+          {
+            "label": "Mare Tranquillitatis",
+            "kind": "m",
+            "x": 58.09,
+            "y": 39.25
+          },
+          {
+            "label": "Mare Serenitatis",
+            "kind": "m",
+            "x": 51.59,
+            "y": 24.38
+          },
+          {
+            "label": "Mare Imbrium",
+            "kind": "m",
+            "x": 38.77,
+            "y": 21.09
+          },
+          {
+            "label": "Oceanus Procellarum",
+            "kind": "m",
+            "x": 23.45,
+            "y": 32.79
+          },
+          {
+            "label": "Mare Nubium",
+            "kind": "m",
+            "x": 37.84,
+            "y": 62.34
+          },
+          {
+            "label": "Mare Fecunditatis",
+            "kind": "m",
+            "x": 64.49,
+            "y": 53.45
+          },
+          {
+            "label": "Mare Nectaris",
+            "kind": "m",
+            "x": 59.19,
+            "y": 58.42
+          },
+          {
+            "label": "Mare Humorum",
+            "kind": "m",
+            "x": 29.74,
+            "y": 65.44
+          },
+          {
+            "label": "Tycho",
+            "kind": "c",
+            "x": 40.77,
+            "y": 78.09
+          },
+          {
+            "label": "Copernicus",
+            "kind": "c",
+            "x": 35.99,
+            "y": 37.76
+          },
+          {
+            "label": "Kepler",
+            "kind": "c",
+            "x": 28.75,
+            "y": 39.59
+          },
+          {
+            "label": "Aristarchus",
+            "kind": "c",
+            "x": 26.86,
+            "y": 28.33
+          },
+          {
+            "label": "Plato",
+            "kind": "c",
+            "x": 41.77,
+            "y": 10.93
+          }
+        ],
+        "minerals": [
+          {
+            "kind": "ti",
+            "title": "Titanium-rich",
+            "label": "Mare Tranquillitatis",
+            "x": 1115,
+            "y": 424
+          },
+          {
+            "kind": "ti",
+            "title": "Titanium-rich",
+            "label": "Oceanus Procellarum",
+            "x": 472,
+            "y": 461
+          },
+          {
+            "kind": "fe",
+            "title": "Iron-rich",
+            "label": "Mare Serenitatis",
+            "x": 991,
+            "y": 263
+          },
+          {
+            "kind": "fe",
+            "title": "Iron-rich",
+            "label": "Mare Imbrium",
+            "x": 744,
+            "y": 228
+          }
+        ],
+        "landings": [
+          {
+            "label": "Chandrayaan-3 · Vikram",
+            "year": "2023",
+            "india": true,
+            "x": 48.85,
+            "y": 91.7,
+            "country": "IN"
+          },
+          {
+            "label": "Chandrayaan-2 · Vikram",
+            "year": "2019",
+            "india": true,
+            "x": 47.25,
+            "y": 92.08,
+            "country": "IN"
+          },
+          {
+            "label": "Chandrayaan-1 · Impact Probe",
+            "year": "2008",
+            "india": true,
+            "x": 43.48,
+            "y": 96.03,
+            "country": "IN"
+          },
+          {
+            "label": "Apollo 11",
+            "year": "1969",
+            "india": false,
+            "x": 55.15,
+            "y": 45.13,
+            "country": "US"
+          },
+          {
+            "label": "Apollo 12",
+            "year": "1969",
+            "india": false,
+            "x": 34.47,
+            "y": 47.89,
+            "country": "US"
+          },
+          {
+            "label": "Apollo 17",
+            "year": "1972",
+            "india": false,
+            "x": 57.13,
+            "y": 30.33,
+            "country": "US"
+          },
+          {
+            "label": "Luna 9",
+            "year": "1966",
+            "india": false,
+            "x": 20.86,
+            "y": 42.02,
+            "country": "SU"
+          },
+          {
+            "label": "Chang'e 5",
+            "year": "2020",
+            "india": false,
+            "x": 29.2,
+            "y": 16.24,
+            "country": "CN"
+          }
+        ]
+      }
     },
     {
       "id": "morning-feathers",
